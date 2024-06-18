@@ -62,11 +62,11 @@ inventory-vault.yaml >> Inventory vault file encrypted by "Inventory vault passw
 - name: 10- Fetch QKView BIG-IP information >> bigip_qkview module creates QKview support file on the remote F5 BIG-IP device and copy it into dest: "./output/{{ backup_file_name }}.qkview"
 
 ## output Folder Example Files
-bigip1-2024-06-18-22-37-54.ucs
-bigip1-2024-06-18-22-37-54.txt
-bigip1-2024-06-18-22-37-54.key
-bigip1-2024-06-18-22-37-54.info
-bigip1-2024-06-18-22-37-54.qkview
+- bigip1-2024-06-18-22-37-54.ucs
+- bigip1-2024-06-18-22-37-54.txt
+- bigip1-2024-06-18-22-37-54.key
+- bigip1-2024-06-18-22-37-54.info
+- bigip1-2024-06-18-22-37-54.qkview
 
 
 
