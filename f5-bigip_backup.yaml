@@ -1,0 +1,90 @@
+---
+- name: PLAY -  Create UCS and Collect all BIG-IP information
+  hosts: "{{ bigip }}"
+  connection: local
+  vars:
+    backup_file_name: "{{ inventory_hostname }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}"
+    qkview_filename: "{{ inventory_host }}.{{ ansible_date_time.iso8601_basic_short }}.localhost.localdomain.qkview"
+    ansible_network_os: "{{ inventory_network_os }}"
+    provider:
+      user: "{{ inventory_user }}"
+      server: "{{ inventory_host }}"
+      server_port: "{{ inventory_port }}"
+      password: "{{ inventory_pass }}"
+      transport: rest
+      timeout: 600
+      validate_certs: no
+      no_f5_teem: false
+  gather_facts: true
+  tasks:
+    - name: 01- Create a new UCS and Download
+      f5networks.f5_modules.bigip_ucs_fetch:
+        async_timeout: 1200
+        src: "{{ backup_file_name }}.ucs"
+        dest: "./output/{{ backup_file_name }}.ucs"
+        create_on_missing: true
+        only_create_file: false
+        fail_on_missing: false
+        provider: "{{ provider }}"
+      delegate_to: localhost
+      when: ansible_network_os == 'f5.bigip'  and get_ucs == 'true'
+    - name: 02- Remove the UCS from the device
+      f5networks.f5_modules.bigip_ucs:
+        ucs: "{{ backup_file_name }}.ucs"
+        state: absent
+        provider: "{{ provider }}"
+      delegate_to: localhost
+      when: ansible_network_os == 'f5.bigip'  and get_ucs == 'true'
+    - name: 03- Get running config on remote device
+      f5networks.f5_modules.bigip_command:
+        chdir: "/"
+        commands:
+           - show running-config recursive
+        provider: "{{ provider }}"
+      delegate_to: localhost
+      register: output
+      when: ansible_network_os == 'f5.bigip' and get_config == 'true'
+    - name: 04- Copy output of running config to file
+      copy: content="{{ output.stdout[0] }}" dest=./output/{{ backup_file_name }}.txt
+      when: ansible_network_os == 'f5.bigip' and get_config == 'true'
+    - name: 05- Get master key on remote device
+      f5networks.f5_modules.bigip_command:
+        #chdir: "/"
+        commands:
+          - run util bash -c "f5mku -K"
+        provider: "{{ provider }}"
+      delegate_to: localhost
+      register: output
+      when: ansible_network_os == 'f5.bigip' and get_ucs == 'true'
+    - name: 06- Copy master key to file
+      copy: content="{{ output.stdout[0] }}" dest=./output/{{ backup_file_name }}.key
+      when: ansible_network_os == 'f5.bigip' and get_ucs == 'true'
+    - name: 07- Collect all BIG-IP information
+      f5networks.f5_modules.bigip_device_info:
+        gather_subset:
+          - system-info
+          - devices          
+        provider: "{{ provider }}"
+      delegate_to: localhost
+      register: device_info
+      when: ansible_network_os == 'f5.bigip'
+    - name: 08- Copy all BIG-IP information
+      copy: content="{{ device_info | to_nice_json }}" dest=./output/{{ backup_file_name }}.info
+      when: ansible_network_os == 'f5.bigip'
+    - name: 09- BIG-IP Hostname information
+      debug:
+        var: qkview_filename
+      when:   ansible_network_os == 'f5.bigip'  and get_qkview == 'true'
+    - name: 10- Fetch QKView BIG-IP information
+      f5networks.f5_modules.bigip_qkview:
+        asm_request_log: false
+        complete_information: false
+        exclude_core: false
+        force: true
+        only_create_file: false
+        dest: "./output/{{ backup_file_name }}.qkview"
+        filename: "{{ inventory_host }}.{{ ansible_date_time.iso8601_basic_short }}.localhost.localdomain.qkview"
+        provider: "{{ provider }}"
+      delegate_to: localhost
+      register: output
+      when: ansible_network_os == 'f5.bigip'  and get_qkview == 'true'
