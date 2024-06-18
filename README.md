@@ -28,11 +28,11 @@ all:
 
 The f5-bigip_backup.yaml file retrieves the below configurations from the F5 devices.
 
-User Configuration set (UCS) Archieve File
-Master Key
-QKView Support File
-Running Configuration
-Device Facts, Hardware and Software Information
+- User Configuration set (UCS) Archieve File
+- Master Key
+- QKView Support File
+- Running Configuration
+- Device Facts, Hardware and Software Information
 
 ## Usage:
 ```bash
