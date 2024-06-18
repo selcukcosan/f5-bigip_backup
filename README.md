@@ -33,23 +33,23 @@ QKView Support File
 Running Configuration
 Device Facts, Hardware and Software Information
 
-#Usage:
+## Usage:
 
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vault_pass.yaml -i inventory-vault.yaml f5-bigip_backup.yaml --extra-vars="bigip=bigip1" --extra-vars="get_ucs=true" --extra-vars="get_config=true" --extra-vars="get_qkview=true"
 
-#Files
+## Files
 f5-bigip_backup.yaml >> Ansible script file
 vault_pass.yaml >> Inventory vault password information
 inventory-vault.yaml >> Inventory vault file encrypted by "Inventory vault password"
 
-#Variables
+## Variables
 "bigip" variable shows which F5 device will be connected.The value can be "bigip1", "bigip2" or "all_f5" as per the example inventory file above.
 "get_ucs" variable shows whether to retrieve UCS backup file. If the value is "true", the Ansible script will take UCS backup and Master Key files and copy these files into "output" folder.
 "get_config" variable shows whether to retrieve the running configuration of the F5 device. If the value is "true", the script will copy the running configuration into "output" folder.
 "get_qkview" variable shows whether to retrieve the QKview support file from the device.  If the value is "true", the script will copy the QKview file into "output" folder.
 
 
-#Task Explanations in f5-bigip_backup.yaml
+##Task Explanations in f5-bigip_backup.yaml
 - name: 01- Create a new UCS and Download >> bigip_ucs_fetch module creates UCS file on the remote F5 BIG-Ip Device and copy the ucs file into dest: "./output/{{ backup_file_name }}.ucs"
 - name: 02- Remove the UCS from the device >> bigip_ucs module deletes the file created in Task 01
 - name: 03- Get running config on remote device && - name: 04- Copy output of running config to file >> bigip_command module gets the running configuration and copy it into dest=./output/{{ backup_file_name }}.txt
@@ -58,7 +58,7 @@ inventory-vault.yaml >> Inventory vault file encrypted by "Inventory vault passw
 - name: 09- BIG-IP Hostname information >> This task it just writes the qkview file name information
 - name: 10- Fetch QKView BIG-IP information >> bigip_qkview module creates QKview support file on the remote F5 BIG-IP device and copy it into dest: "./output/{{ backup_file_name }}.qkview"
 
-#output Folder Example Files
+## output Folder Example Files
 bigip1-2024-06-18-22-37-54.ucs
 bigip1-2024-06-18-22-37-54.txt
 bigip1-2024-06-18-22-37-54.key
