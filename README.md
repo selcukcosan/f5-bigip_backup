@@ -46,10 +46,10 @@ vault_pass.yaml >> Inventory vault password information
 inventory-vault.yaml >> Inventory vault file encrypted by "Inventory vault password"
 
 ## Variables
-"bigip" variable shows which F5 device will be connected.The value can be "bigip1", "bigip2" or "all_f5" as per the example inventory file above.
-"get_ucs" variable shows whether to retrieve UCS backup file. If the value is "true", the Ansible script will take UCS backup and Master Key files and copy these files into "output" folder.
-"get_config" variable shows whether to retrieve the running configuration of the F5 device. If the value is "true", the script will copy the running configuration into "output" folder.
-"get_qkview" variable shows whether to retrieve the QKview support file from the device.  If the value is "true", the script will copy the QKview file into "output" folder.
+- "bigip" variable shows which F5 device will be connected.The value can be "bigip1", "bigip2" or "all_f5" as per the example inventory file above.
+- "get_ucs" variable shows whether to retrieve UCS backup file. If the value is "true", the Ansible script will take UCS backup and Master Key files and copy these files into "output" folder.
+- "get_config" variable shows whether to retrieve the running configuration of the F5 device. If the value is "true", the script will copy the running configuration into "output" folder.
+- "get_qkview" variable shows whether to retrieve the QKview support file from the device.  If the value is "true", the script will copy the QKview file into "output" folder.
 
 
 ## Task Explanations in f5-bigip_backup.yaml
