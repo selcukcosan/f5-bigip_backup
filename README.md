@@ -49,7 +49,7 @@ inventory-vault.yaml >> Inventory vault file encrypted by "Inventory vault passw
 "get_qkview" variable shows whether to retrieve the QKview support file from the device.  If the value is "true", the script will copy the QKview file into "output" folder.
 
 
-##Task Explanations in f5-bigip_backup.yaml
+## Task Explanations in f5-bigip_backup.yaml
 - name: 01- Create a new UCS and Download >> bigip_ucs_fetch module creates UCS file on the remote F5 BIG-Ip Device and copy the ucs file into dest: "./output/{{ backup_file_name }}.ucs"
 - name: 02- Remove the UCS from the device >> bigip_ucs module deletes the file created in Task 01
 - name: 03- Get running config on remote device && - name: 04- Copy output of running config to file >> bigip_command module gets the running configuration and copy it into dest=./output/{{ backup_file_name }}.txt
