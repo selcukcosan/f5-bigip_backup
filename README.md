@@ -4,7 +4,6 @@ This Ansible script takes backup of F5 BIG-IP devices in your inventory. The scr
 
 The inventory yaml format is simple as below.
 
-ansible-vault view inventory-vault.yaml
 
 ```yml
 ---
