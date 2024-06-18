@@ -6,7 +6,8 @@ The inventory yaml format is simple as below.
 
 ansible-vault view inventory-vault.yaml
 
-`---
+```yml
+---
 all:
   children:
     all_f5:
@@ -22,7 +23,8 @@ all:
           inventory_host: 192.168.1.246
           inventory_port: 443
           inventory_user: admin
-          inventory_pass: password`
+          inventory_pass: password
+```
 
 
 The f5-bigip_backup.yaml file retrieves the below configurations from the F5 devices.
