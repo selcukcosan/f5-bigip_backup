@@ -36,8 +36,10 @@ Running Configuration
 Device Facts, Hardware and Software Information
 
 ## Usage:
+```bash
 
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vault_pass.yaml -i inventory-vault.yaml f5-bigip_backup.yaml --extra-vars="bigip=bigip1" --extra-vars="get_ucs=true" --extra-vars="get_config=true" --extra-vars="get_qkview=true"
+```
 
 ## Files
 f5-bigip_backup.yaml >> Ansible script file
