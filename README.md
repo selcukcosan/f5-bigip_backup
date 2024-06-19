@@ -23,6 +23,12 @@ all:
           inventory_port: 443
           inventory_user: admin
           inventory_pass: password
+        bigip3:
+          inventory_network_os: f5.bigip
+          inventory_host: 192.168.1.247
+          inventory_port: 443
+          inventory_user: admin
+          inventory_pass: password
 ```
 
 
