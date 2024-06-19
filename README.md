@@ -40,9 +40,14 @@ The f5-bigip_backup.yaml file retrieves the below configurations from the F5 dev
 - Running Configuration
 - Device Facts, Hardware and Software Information
 
-## Usage:
+## Prerequisite
 ```bash
 ansible-galaxy collection install f5networks.f5_modules
+```
+
+## Usage:
+```bash
+
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vault_pass.yaml -i inventory-vault.yaml f5-bigip_backup.yaml --extra-vars="bigip=bigip1" --extra-vars="get_ucs=true" --extra-vars="get_config=true" --extra-vars="get_qkview=true"
 ```
 
