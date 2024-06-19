@@ -41,6 +41,7 @@ The f5-bigip_backup.yaml file retrieves the below configurations from the F5 dev
 - Device Facts, Hardware and Software Information
 
 ## Prerequisite
+F5 Ansible Imperative Modules must be installed before running the script.
 ```bash
 ansible-galaxy collection install f5networks.f5_modules
 ```
