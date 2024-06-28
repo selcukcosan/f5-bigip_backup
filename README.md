@@ -52,7 +52,7 @@ ansible-galaxy collection install f5networks.f5_modules
 ## Usage:
 ```bash
 
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vault_pass.yaml -i inventory-vault.yaml f5-bigip_backup.yaml --extra-vars="bigip=bigip1" --extra-vars="get_ucs=true" --extra-vars="get_config=true" --extra-vars="get_qkview=true"
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vault_pass.yaml -i inventory-vault.yaml f5-bigip_backup.yaml --extra-vars="bigip=bigip1" --extra-vars="get_ucs=true" --extra-vars="get_config=true" --extra-vars="get_qkview=true" --extra-vars="get_scf=true" --extra-vars="get_facts=true"
 ```
 
 **_NOTE:_**  `output` folder must be created before running the script.
@@ -68,7 +68,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vaul
 - `get_config` variable shows whether to retrieve the running configuration of the F5 device. If the value is "true", the script will copy the running configuration into "output" folder.
 - `get_qkview` variable shows whether to retrieve the QKview support file from the device.  If the value is "true", the script will copy the QKview file into "output" folder.
 - `get_scf` variable shows whether to create SCF files into /var/local/scf/ folder. The script does not copy these files, you need to do manual copy from F5 to local
-
+- `get_facts` variable shows whether to retrieve F5 BIG-IP Facts information from the device.
 
 ## Task Explanations in f5-bigip_backup.yaml
 - name: 01- Create a new UCS and Download >> bigip_ucs_fetch module creates UCS file on the remote F5 BIG-Ip Device and copy the ucs file into dest: "./output/{{ backup_file_name }}.ucs"
