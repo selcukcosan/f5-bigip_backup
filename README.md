@@ -2,6 +2,15 @@
 
 This Ansible script takes backup of F5 BIG-IP devices in your inventory. The script uses the official f5networks.f5_modules Ansible modules on https://galaxy.ansible.com/ui/repo/published/f5networks/f5_modules/
 
+The f5-bigip_backup.yaml file retrieves the below configurations from the F5 devices.
+
+- User Configuration set (UCS) Archieve File
+- Master Key
+- Creates SCF File only, you need to copy manually from F5
+- QKView Support File
+- Running Configuration
+- Device Facts, Hardware and Software Information
+
 The inventory yaml format is simple as below.
 
 
@@ -32,13 +41,7 @@ all:
 ```
 
 
-The f5-bigip_backup.yaml file retrieves the below configurations from the F5 devices.
 
-- User Configuration set (UCS) Archieve File
-- Master Key
-- QKView Support File
-- Running Configuration
-- Device Facts, Hardware and Software Information
 
 ## Prerequisite
 F5 Ansible Imperative Modules must be installed before running the script.
@@ -64,6 +67,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vaul
 - `get_ucs` variable shows whether to retrieve UCS backup file. If the value is "true", the Ansible script will take UCS backup and Master Key files and copy these files into "output" folder.
 - `get_config` variable shows whether to retrieve the running configuration of the F5 device. If the value is "true", the script will copy the running configuration into "output" folder.
 - `get_qkview` variable shows whether to retrieve the QKview support file from the device.  If the value is "true", the script will copy the QKview file into "output" folder.
+- `get_scf` variable shows whether to create SCF files into /var/local/scf/ folder. The script does not copy these files, you need to do manual copy from F5 to local
 
 
 ## Task Explanations in f5-bigip_backup.yaml
