@@ -78,10 +78,10 @@
         provider: "{{ provider }}"
       delegate_to: localhost
       register: device_info
-      when: ansible_network_os == 'f5.bigip'
+      when: ansible_network_os == 'f5.bigip' and get_facts == 'true'
     - name: 10- Copy all BIG-IP information
       copy: content="{{ device_info | to_nice_json }}" dest=./output/{{ backup_file_name }}.info
-      when: ansible_network_os == 'f5.bigip'
+      when: ansible_network_os == 'f5.bigip' and get_facts == 'true'
     - name: 11- BIG-IP Hostname information
       debug:
         var: qkview_filename
