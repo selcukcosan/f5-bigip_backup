@@ -79,14 +79,14 @@
       delegate_to: localhost
       register: device_info
       when: ansible_network_os == 'f5.bigip'
-    - name: 10- Copy all BIG-IP information
+    - name: 08- Copy all BIG-IP information
       copy: content="{{ device_info | to_nice_json }}" dest=./output/{{ backup_file_name }}.info
       when: ansible_network_os == 'f5.bigip'
-    - name: 11- BIG-IP Hostname information
+    - name: 09- BIG-IP Hostname information
       debug:
         var: qkview_filename
       when:   ansible_network_os == 'f5.bigip'  and get_qkview == 'true'
-    - name: 12- Fetch QKView BIG-IP information
+    - name: 10- Fetch QKView BIG-IP information
       f5networks.f5_modules.bigip_qkview:
         asm_request_log: false
         complete_information: false
