@@ -2,7 +2,7 @@
 
 This Ansible script takes backup of F5 BIG-IP devices in your inventory. The script uses the official f5networks.f5_modules Ansible modules on https://galaxy.ansible.com/ui/repo/published/f5networks/f5_modules/
 
-The f5-bigip_backup.yaml file retrieves the below configurations from the F5 devices.
+The f5-bigip_backup.yaml script generates UCS,SCF, QKview, Master key, and running configuration files and retrieves these files from the F5 devices.
 
 - User Configuration set (UCS) Archieve File
 - Master Key
