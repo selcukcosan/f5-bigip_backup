@@ -75,7 +75,8 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vaul
 - name: 02- Remove the UCS from the device >> bigip_ucs module deletes the file created in Task 01
 - name: 03- Get running config on remote device && - name: 04- Copy output of running config to file >> bigip_command module gets the running configuration and copy it into dest=./output/{{ backup_file_name }}.txt
 - name: 05- Get master key on remote device && - name: 06- Copy master key to file >> bigip_command module gets the Master key file from F5 BIG-IP and copy it into dest=./output/{{ backup_file_name }}.key
-- name: 07- Writing SCF Files  >> Takes scf files backup into /var/local/scf/ folder. But does not copy these files into local system. you need to copy it manually.
+- name: 07- Writing SCF Files  >> Takes scf files backup into /var/local/scf/ folder. But does not copy these files into local system. you need to copy it manually as shown in task name: 08
+- name: 08- Please Copy Files ... >> This task will write the exact scp command to download the generated SCF files from F5 BI-IP to local system. 
 - name: 09- Collect all BIG-IP information && - name: 10- Copy all BIG-IP information >> bigip_device_info retrieves the F5 BIG-IP Facts information and copy it into dest=./output/{{ backup_file_name }}.info
 - name: 11- BIG-IP Hostname information >> This task it just writes the qkview file name information
 - name: 12- Fetch QKView BIG-IP information >> bigip_qkview module creates QKview support file on the remote F5 BIG-IP device and copy it into dest: "./output/{{ backup_file_name }}.qkview"
