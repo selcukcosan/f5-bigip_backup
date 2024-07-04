@@ -86,7 +86,10 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvv --vault-password-file vaul
 - bigip1-2024-06-18-22-37-54.key
 - bigip1-2024-06-18-22-37-54.info
 - bigip1-2024-06-18-22-37-54.qkview
-- bigip1-2024-06-18-22-37-54.scf.txt >> Contains filename information only.
+- bigip1-2024-06-18-22-37-54.scp_command.txt >> Contains scp commands to download the SCF files from F5 BIG-IP to local system as below
+  scp admin@192.168.1.245:/var/local/scf/bigip1-2024-07-04-08-26-39.scf ./output/bigip1-2024-07-04-08-26-39.scf
+  scp admin@192.168.1.245:/var/local/scf/bigip1-2024-07-04-08-26-39.scf.tar ./output/bigip1-2024-07-04-08-26-39.scf.tar
+
 
 
 
