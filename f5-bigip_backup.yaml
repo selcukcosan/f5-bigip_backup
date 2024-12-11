@@ -1,5 +1,5 @@
 ---
-- name: PLAY -  Create UCS,SCF, QKview and Collect all BIG-IP information
+- name: PLAY -  Create UCS, SCF, QKview files and Collect all BIG-IP information
   hosts: "{{ bigip }}"
   connection: local
   vars:
